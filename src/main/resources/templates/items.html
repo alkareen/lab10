@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Товары</title>
+</head>
+<body>
+<h1>Все товары</h1>
+
+<ul>
+    <li th:each="item : ${items}">
+        <strong th:text="${item.name}">Название</strong> —
+        Цена: <span th:text="${item.price}">0</span> ₸ —
+        Количество: <span th:text="${item.quantity}">0</span> —
+        Производитель:
+        <span th:text="${item.manufacturer != null ? item.manufacturer.name : 'Не указан'}">
+            Не указан
+        </span>
+    </li>
+</ul>
+
+<a href="/">На главную</a>
+</body>
+</html>

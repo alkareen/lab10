@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страны</title>
+</head>
+<body>
+<h1>Страны-производители</h1>
+
+<ul>
+    <li th:each="country : ${countries}"
+        th:text="${country.name + ' (' + country.code + ')'}">
+        Страна
+    </li>
+</ul>
+
+<a href="/">На главную</a>
+</body>
+</html>

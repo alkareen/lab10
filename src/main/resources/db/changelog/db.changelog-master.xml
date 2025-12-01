@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="changes/2025-11-27-01-create-countries.xml" relativeToChangelogFile="true"/>
+    <include file="changes/2025-11-27-02-create-items.xml" relativeToChangelogFile="true"/>
+    <include file="changes/2025-11-27-03-add-fk-manufacturer.xml" relativeToChangelogFile="true"/>
+    <include file="changes/2025-11-27-04-seed-countries.xml" relativeToChangelogFile="true"/>
+    <include file="changes/2025-11-27-05-seed-items.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>
