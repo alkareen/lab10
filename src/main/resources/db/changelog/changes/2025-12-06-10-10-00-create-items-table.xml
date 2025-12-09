@@ -5,21 +5,21 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="2025-11-27-02-create-items" author="student">
+    <changeSet id="create-items-table" author="grok">
         <createTable tableName="items">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="price" type="INT">
+            <column name="price" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="quantity" type="INT">
+            <column name="quantity" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="manufacturer_id" type="BIGINT"/>
+            <column name="manufacturer_id" type="bigint"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

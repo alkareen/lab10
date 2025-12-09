@@ -1,5 +1,4 @@
 package com.example.lab9.models;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,20 +8,22 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "price")
     private int price;
 
-    @Column(nullable = false)
+    @Column(name = "quantity")
     private int quantity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Country manufacturer;
 }

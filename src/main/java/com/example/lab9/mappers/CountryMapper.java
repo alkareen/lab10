@@ -1,10 +1,13 @@
 package com.example.lab9.mappers;
-import com.example.lab9.dtos.CountryDto;
+import com.example.lab9.dtos.CountryDTO;
 import com.example.lab9.models.Country;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CountryMapper {
-    CountryDto toDto(Country country);
-    Country toEntity(CountryDto dto);
+
+    CountryDTO toDto(Country country);
+
+    Country toEntity(CountryDTO dto);
 }

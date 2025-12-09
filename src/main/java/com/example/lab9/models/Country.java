@@ -8,13 +8,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Country {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(nullable = false, length = 10)
+    @Column(name = "code")
     private String code;
 }

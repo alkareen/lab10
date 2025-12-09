@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="2025-11-27-04-seed-countries" author="student">
+    <changeSet id="insert-countries" author="grok">
         <insert tableName="countries">
             <column name="name" value="United States"/>
             <column name="code" value="US"/>
@@ -21,10 +21,6 @@
         <insert tableName="countries">
             <column name="name" value="Japan"/>
             <column name="code" value="JP"/>
-        </insert>
-        <insert tableName="countries">
-            <column name="name" value="South Korea"/>
-            <column name="code" value="KR"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
