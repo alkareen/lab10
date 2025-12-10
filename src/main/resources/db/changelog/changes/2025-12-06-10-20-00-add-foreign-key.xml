@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="add-foreign-key-manufacturer" author="grok">
+    <changeSet id="add-foreign-key-manufacturer" author="zaqostaqos">
         <addForeignKeyConstraint baseTableName="items"
                                  baseColumnNames="manufacturer_id"
                                  constraintName="fk_manufacturer_id"

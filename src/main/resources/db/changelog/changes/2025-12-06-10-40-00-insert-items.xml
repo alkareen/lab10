@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="insert-items" author="grok">
+    <changeSet id="insert-items" author="zaqostaqos">
         <insert tableName="items">
             <column name="name" value="iPhone 16"/>
             <column name="price" value="999"/>

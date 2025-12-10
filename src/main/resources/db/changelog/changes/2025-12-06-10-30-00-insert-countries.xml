@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="insert-countries" author="grok">
+    <changeSet id="insert-countries" author="zaqostaqos">
         <insert tableName="countries">
             <column name="name" value="United States"/>
             <column name="code" value="US"/>
