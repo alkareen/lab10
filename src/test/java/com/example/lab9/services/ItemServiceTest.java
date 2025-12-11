@@ -37,7 +37,7 @@ class ItemServiceTest {
     private ItemService itemService;
 
     @Test
-    void getAllItems_shouldReturnListOfDtos() {
+    void getAllItems() {
         Country country = new Country();
         country.setId(1L);
 
@@ -82,7 +82,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void getItemById_shouldReturnDtoWhenFound() {
+    void getItemById() {
         Long id = 1L;
         Country country = new Country();
         country.setId(1L);
@@ -111,7 +111,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void getItemById_shouldReturnNullWhenNotFound() {
+    void getItemById_2() {
         Long id = 1L;
         when(itemRepository.findById(id)).thenReturn(Optional.empty());
 
@@ -121,7 +121,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void createItem_shouldSaveAndReturnDtoWhenManufacturerFound() {
+    void createItem() {
         ItemDTO dto = new ItemDTO();
         dto.setName("iPhone");
         dto.setPrice(999);
@@ -163,7 +163,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void createItem_shouldThrowExceptionWhenManufacturerNotFound() {
+    void createItem_2() {
         ItemDTO dto = new ItemDTO();
         dto.setManufacturerId(1L);
 
@@ -177,7 +177,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void updateItem_shouldUpdateAndReturnDtoWhenFoundAndManufacturerFound() {
+    void updateItem() {
         Long id = 1L;
         ItemDTO dto = new ItemDTO();
         dto.setName("Updated iPhone");
@@ -220,7 +220,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void updateItem_shouldReturnNullWhenNotFound() {
+    void updateItem_2() {
 
         Long id = 1L;
         ItemDTO dto = new ItemDTO();
@@ -233,7 +233,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void updateItem_shouldThrowExceptionWhenManufacturerNotFound() {
+    void updateItem_3() {
         Long id = 1L;
         ItemDTO dto = new ItemDTO();
         dto.setManufacturerId(1L);
@@ -249,7 +249,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void deleteItem_shouldDeleteById() {
+    void deleteItem() {
         Long id = 1L;
 
         itemService.deleteItem(id);

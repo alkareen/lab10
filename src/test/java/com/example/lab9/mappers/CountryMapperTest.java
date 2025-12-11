@@ -23,7 +23,7 @@ class CountryMapperTest {
     }
 
     @Test
-    void toDto_shouldMapEntityToDto() {
+    void toDto() {
 
         Country country = new Country();
         country.setId(1L);
@@ -39,7 +39,7 @@ class CountryMapperTest {
     }
 
     @Test
-    void toEntity_shouldMapDtoToEntity() {
+    void toEntity() {
         CountryDTO dto = new CountryDTO();
         dto.setId(1L);
         dto.setName("United States");
@@ -54,21 +54,21 @@ class CountryMapperTest {
     }
 
     @Test
-    void toDto_shouldHandleNullEntity() {
+    void toDto_2() {
         CountryDTO dto = countryMapper.toDto(null);
 
         assertNull(dto);
     }
 
     @Test
-    void toEntity_shouldHandleNullDto() {
+    void toEntity_2() {
         Country country = countryMapper.toEntity(null);
 
         assertNull(country);
     }
 
     @Test
-    void toDtoList_shouldMapListOfEntitiesToDtos() {
+    void toDtoList() {
         Country country1 = new Country();
         country1.setId(1L);
         country1.setName("United States");

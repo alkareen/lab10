@@ -31,7 +31,7 @@ class CountryServiceTest {
     private CountryService countryService;
 
     @Test
-    void getAllCountries_shouldReturnListOfDtos() {
+    void getAllCountries() {
         Country country1 = new Country();
         country1.setId(1L);
         country1.setName("US");
@@ -67,7 +67,7 @@ class CountryServiceTest {
     }
 
     @Test
-    void getCountryById_shouldReturnDtoWhenFound() {
+    void getCountryById() {
         Long id = 1L;
         Country country = new Country();
         country.setId(id);
@@ -90,7 +90,7 @@ class CountryServiceTest {
     }
 
     @Test
-    void getCountryById_shouldReturnNullWhenNotFound() {
+    void getCountryById_2() {
         Long id = 1L;
         when(countryRepository.findById(id)).thenReturn(Optional.empty());
 
@@ -101,7 +101,7 @@ class CountryServiceTest {
     }
 
     @Test
-    void createCountry_shouldSaveAndReturnDto() {
+    void createCountry() {
         CountryDTO dto = new CountryDTO();
         dto.setName("US");
         dto.setCode("US");
@@ -131,7 +131,7 @@ class CountryServiceTest {
     }
 
     @Test
-    void updateCountry_shouldUpdateAndReturnDtoWhenFound() {
+    void updateCountry() {
         Long id = 1L;
         CountryDTO dto = new CountryDTO();
         dto.setName("Updated US");
@@ -163,7 +163,7 @@ class CountryServiceTest {
     }
 
     @Test
-    void updateCountry_shouldReturnNullWhenNotFound() {
+    void updateCountry_2() {
         Long id = 1L;
         CountryDTO dto = new CountryDTO();
         when(countryRepository.findById(id)).thenReturn(Optional.empty());
@@ -175,7 +175,7 @@ class CountryServiceTest {
     }
 
     @Test
-    void deleteCountry_shouldDeleteById() {
+    void deleteCountry() {
         Long id = 1L;
 
         countryService.deleteCountry(id);

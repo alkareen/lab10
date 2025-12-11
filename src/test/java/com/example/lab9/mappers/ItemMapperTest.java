@@ -24,7 +24,7 @@ class ItemMapperTest {
     }
 
     @Test
-    void toDto_shouldMapEntityToDto() {
+    void toDto() {
         Country country = new Country();
         country.setId(1L);
 
@@ -46,7 +46,7 @@ class ItemMapperTest {
     }
 
     @Test
-    void toEntity_shouldMapDtoToEntity() {
+    void toEntity() {
         ItemDTO dto = new ItemDTO();
         dto.setId(1L);
         dto.setName("iPhone 16");
@@ -65,21 +65,21 @@ class ItemMapperTest {
     }
 
     @Test
-    void toDto_shouldHandleNullEntity() {
+    void toDto_2() {
         ItemDTO dto = itemMapper.toDto(null);
 
         assertNull(dto);
     }
 
     @Test
-    void toEntity_shouldHandleNullDto() {
+    void toEntity_2() {
         Item item = itemMapper.toEntity(null);
 
         assertNull(item);
     }
 
     @Test
-    void toDto_shouldHandleNullManufacturer() {
+    void toDto_nm() {
         Item item = new Item();
         item.setId(1L);
         item.setName("iPhone 16");
@@ -93,7 +93,7 @@ class ItemMapperTest {
     }
 
     @Test
-    void toDtoList_shouldMapListOfEntitiesToDtos() {
+    void toDtoList() {
         Country country = new Country();
         country.setId(1L);
 
