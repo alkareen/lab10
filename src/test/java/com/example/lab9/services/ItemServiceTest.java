@@ -6,11 +6,9 @@ import com.example.lab9.models.Country;
 import com.example.lab9.models.Item;
 import com.example.lab9.repositories.CountryRepository;
 import com.example.lab9.repositories.ItemRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,20 +19,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class ItemServiceTest {
 
-    @Mock
     private ItemRepository itemRepository;
-
-    @Mock
     private CountryRepository countryRepository;
-
-    @Mock
     private ItemMapper itemMapper;
-
-    @InjectMocks
     private ItemService itemService;
+
+    @BeforeEach
+    void setUp() {
+        itemRepository = mock(ItemRepository.class);
+        countryRepository = mock(CountryRepository.class);
+        itemMapper = mock(ItemMapper.class);
+        itemService = new ItemService();
+        ReflectionTestUtils.setField(itemService, "itemRepository", itemRepository);
+        ReflectionTestUtils.setField(itemService, "countryRepository", countryRepository);
+        ReflectionTestUtils.setField(itemService, "itemMapper", itemMapper);
+    }
 
     @Test
     void getAllItems() {
@@ -111,7 +112,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void getItemById_2() {
+    void getItemById_shouldReturnNullWhenNotFound() {
         Long id = 1L;
         when(itemRepository.findById(id)).thenReturn(Optional.empty());
 
@@ -163,7 +164,7 @@ class ItemServiceTest {
     }
 
     @Test
-    void createItem_2() {
+    void createItem_shouldThrowExceptionWhenManufacturerNotFound() {
         ItemDTO dto = new ItemDTO();
         dto.setManufacturerId(1L);
 
@@ -221,7 +222,6 @@ class ItemServiceTest {
 
     @Test
     void updateItem_2() {
-
         Long id = 1L;
         ItemDTO dto = new ItemDTO();
         when(itemRepository.findById(id)).thenReturn(Optional.empty());

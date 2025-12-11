@@ -56,14 +56,14 @@ class CountryMapperTest {
     @Test
     void toDto_2() {
         CountryDTO dto = countryMapper.toDto(null);
-
+//КЧАУУ
         assertNull(dto);
     }
 
     @Test
     void toEntity_2() {
         Country country = countryMapper.toEntity(null);
-
+//
         assertNull(country);
     }
 

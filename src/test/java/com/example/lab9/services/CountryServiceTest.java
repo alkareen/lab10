@@ -4,11 +4,9 @@ import com.example.lab9.dtos.CountryDTO;
 import com.example.lab9.mappers.CountryMapper;
 import com.example.lab9.models.Country;
 import com.example.lab9.repositories.CountryRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,17 +16,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class CountryServiceTest {
 
-    @Mock
     private CountryRepository countryRepository;
-
-    @Mock
     private CountryMapper countryMapper;
-
-    @InjectMocks
     private CountryService countryService;
+
+    @BeforeEach
+    void setUp() {
+        countryRepository = mock(CountryRepository.class);
+        countryMapper = mock(CountryMapper.class);
+        countryService = new CountryService();
+        ReflectionTestUtils.setField(countryService, "countryRepository", countryRepository);
+        ReflectionTestUtils.setField(countryService, "countryMapper", countryMapper);
+    }
 
     @Test
     void getAllCountries() {
@@ -90,7 +91,7 @@ class CountryServiceTest {
     }
 
     @Test
-    void getCountryById_2() {
+    void getCountryById_shouldReturnNullWhenNotFound() {
         Long id = 1L;
         when(countryRepository.findById(id)).thenReturn(Optional.empty());
 
