@@ -81,7 +81,7 @@ class CountryMapperTest {
 
         List<Country> countries = Arrays.asList(country1, country2);
 
-        List<CountryDTO> dtos = countries.stream().map(countryMapper::toDto).toList(); // Since mapper doesn't have list method, simulate
+        List<CountryDTO> dtos = countries.stream().map(countryMapper::toDto).toList();
 
         assertThat(dtos).hasSize(2);
         assertThat(dtos.get(0).getId()).isEqualTo(1L);
