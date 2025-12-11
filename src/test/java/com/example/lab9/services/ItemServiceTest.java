@@ -38,7 +38,6 @@ class ItemServiceTest {
 
     @Test
     void getAllItems_shouldReturnListOfDtos() {
-        // Given
         Country country = new Country();
         country.setId(1L);
 
@@ -76,17 +75,14 @@ class ItemServiceTest {
         when(itemMapper.toDto(item1)).thenReturn(dto1);
         when(itemMapper.toDto(item2)).thenReturn(dto2);
 
-        // When
         List<ItemDTO> result = itemService.getAllItems();
 
-        // Then
         assertThat(result).hasSize(2);
         verify(itemRepository, times(1)).findAll();
     }
 
     @Test
     void getItemById_shouldReturnDtoWhenFound() {
-        // Given
         Long id = 1L;
         Country country = new Country();
         country.setId(1L);
@@ -108,30 +104,24 @@ class ItemServiceTest {
         when(itemRepository.findById(id)).thenReturn(Optional.of(item));
         when(itemMapper.toDto(item)).thenReturn(dto);
 
-        // When
         ItemDTO result = itemService.getItemById(id);
 
-        // Then
         assertThat(result).isNotNull();
         verify(itemRepository, times(1)).findById(id);
     }
 
     @Test
     void getItemById_shouldReturnNullWhenNotFound() {
-        // Given
         Long id = 1L;
         when(itemRepository.findById(id)).thenReturn(Optional.empty());
 
-        // When
         ItemDTO result = itemService.getItemById(id);
 
-        // Then
         assertThat(result).isNull();
     }
 
     @Test
     void createItem_shouldSaveAndReturnDtoWhenManufacturerFound() {
-        // Given
         ItemDTO dto = new ItemDTO();
         dto.setName("iPhone");
         dto.setPrice(999);
@@ -165,10 +155,8 @@ class ItemServiceTest {
         when(itemRepository.save(item)).thenReturn(saved);
         when(itemMapper.toDto(saved)).thenReturn(savedDto);
 
-        // When
         ItemDTO result = itemService.createItem(dto);
 
-        // Then
         assertThat(result.getId()).isEqualTo(1L);
         verify(itemRepository, times(1)).save(item);
         assertThat(item.getManufacturer()).isEqualTo(country);
@@ -176,7 +164,6 @@ class ItemServiceTest {
 
     @Test
     void createItem_shouldThrowExceptionWhenManufacturerNotFound() {
-        // Given
         ItemDTO dto = new ItemDTO();
         dto.setManufacturerId(1L);
 
@@ -185,14 +172,12 @@ class ItemServiceTest {
         when(itemMapper.toEntity(dto)).thenReturn(item);
         when(countryRepository.findById(1L)).thenReturn(Optional.empty());
 
-        // When & Then
         assertThrows(RuntimeException.class, () -> itemService.createItem(dto));
         verify(itemRepository, never()).save(any());
     }
 
     @Test
     void updateItem_shouldUpdateAndReturnDtoWhenFoundAndManufacturerFound() {
-        // Given
         Long id = 1L;
         ItemDTO dto = new ItemDTO();
         dto.setName("Updated iPhone");
@@ -228,32 +213,27 @@ class ItemServiceTest {
         when(itemRepository.save(existing)).thenReturn(updated);
         when(itemMapper.toDto(updated)).thenReturn(updatedDto);
 
-        // When
         ItemDTO result = itemService.updateItem(id, dto);
 
-        // Then
         assertThat(result.getName()).isEqualTo("Updated iPhone");
         verify(itemRepository, times(1)).save(existing);
     }
 
     @Test
     void updateItem_shouldReturnNullWhenNotFound() {
-        // Given
+
         Long id = 1L;
         ItemDTO dto = new ItemDTO();
         when(itemRepository.findById(id)).thenReturn(Optional.empty());
 
-        // When
         ItemDTO result = itemService.updateItem(id, dto);
 
-        // Then
         assertThat(result).isNull();
         verify(itemRepository, never()).save(any());
     }
 
     @Test
     void updateItem_shouldThrowExceptionWhenManufacturerNotFound() {
-        // Given
         Long id = 1L;
         ItemDTO dto = new ItemDTO();
         dto.setManufacturerId(1L);
@@ -264,20 +244,16 @@ class ItemServiceTest {
         when(itemRepository.findById(id)).thenReturn(Optional.of(existing));
         when(countryRepository.findById(1L)).thenReturn(Optional.empty());
 
-        // When & Then
         assertThrows(RuntimeException.class, () -> itemService.updateItem(id, dto));
         verify(itemRepository, never()).save(any());
     }
 
     @Test
     void deleteItem_shouldDeleteById() {
-        // Given
         Long id = 1L;
 
-        // When
         itemService.deleteItem(id);
 
-        // Then
         verify(itemRepository, times(1)).deleteById(id);
     }
 }

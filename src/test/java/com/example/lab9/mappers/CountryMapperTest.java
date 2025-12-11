@@ -24,16 +24,14 @@ class CountryMapperTest {
 
     @Test
     void toDto_shouldMapEntityToDto() {
-        // Given
+
         Country country = new Country();
         country.setId(1L);
         country.setName("United States");
         country.setCode("US");
 
-        // When
         CountryDTO dto = countryMapper.toDto(country);
 
-        // Then
         assertNotNull(dto);
         assertThat(dto.getId()).isEqualTo(1L);
         assertThat(dto.getName()).isEqualTo("United States");
@@ -42,16 +40,13 @@ class CountryMapperTest {
 
     @Test
     void toEntity_shouldMapDtoToEntity() {
-        // Given
         CountryDTO dto = new CountryDTO();
         dto.setId(1L);
         dto.setName("United States");
         dto.setCode("US");
 
-        // When
         Country country = countryMapper.toEntity(dto);
 
-        // Then
         assertNotNull(country);
         assertThat(country.getId()).isEqualTo(1L);
         assertThat(country.getName()).isEqualTo("United States");
@@ -60,25 +55,20 @@ class CountryMapperTest {
 
     @Test
     void toDto_shouldHandleNullEntity() {
-        // When
         CountryDTO dto = countryMapper.toDto(null);
 
-        // Then
         assertNull(dto);
     }
 
     @Test
     void toEntity_shouldHandleNullDto() {
-        // When
         Country country = countryMapper.toEntity(null);
 
-        // Then
         assertNull(country);
     }
 
     @Test
     void toDtoList_shouldMapListOfEntitiesToDtos() {
-        // Given
         Country country1 = new Country();
         country1.setId(1L);
         country1.setName("United States");
@@ -91,10 +81,8 @@ class CountryMapperTest {
 
         List<Country> countries = Arrays.asList(country1, country2);
 
-        // When
         List<CountryDTO> dtos = countries.stream().map(countryMapper::toDto).toList(); // Since mapper doesn't have list method, simulate
 
-        // Then
         assertThat(dtos).hasSize(2);
         assertThat(dtos.get(0).getId()).isEqualTo(1L);
         assertThat(dtos.get(1).getId()).isEqualTo(2L);

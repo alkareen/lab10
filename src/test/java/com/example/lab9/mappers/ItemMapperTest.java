@@ -25,7 +25,6 @@ class ItemMapperTest {
 
     @Test
     void toDto_shouldMapEntityToDto() {
-        // Given
         Country country = new Country();
         country.setId(1L);
 
@@ -36,10 +35,8 @@ class ItemMapperTest {
         item.setQuantity(100);
         item.setManufacturer(country);
 
-        // When
         ItemDTO dto = itemMapper.toDto(item);
 
-        // Then
         assertNotNull(dto);
         assertThat(dto.getId()).isEqualTo(1L);
         assertThat(dto.getName()).isEqualTo("iPhone 16");
@@ -50,7 +47,6 @@ class ItemMapperTest {
 
     @Test
     void toEntity_shouldMapDtoToEntity() {
-        // Given
         ItemDTO dto = new ItemDTO();
         dto.setId(1L);
         dto.setName("iPhone 16");
@@ -58,39 +54,32 @@ class ItemMapperTest {
         dto.setQuantity(100);
         dto.setManufacturerId(1L);
 
-        // When
         Item item = itemMapper.toEntity(dto);
 
-        // Then
         assertNotNull(item);
         assertThat(item.getId()).isEqualTo(1L);
         assertThat(item.getName()).isEqualTo("iPhone 16");
         assertThat(item.getPrice()).isEqualTo(999);
         assertThat(item.getQuantity()).isEqualTo(100);
-        assertNull(item.getManufacturer()); // Ignored as per mapping
+        assertNull(item.getManufacturer());
     }
 
     @Test
     void toDto_shouldHandleNullEntity() {
-        // When
         ItemDTO dto = itemMapper.toDto(null);
 
-        // Then
         assertNull(dto);
     }
 
     @Test
     void toEntity_shouldHandleNullDto() {
-        // When
         Item item = itemMapper.toEntity(null);
 
-        // Then
         assertNull(item);
     }
 
     @Test
     void toDto_shouldHandleNullManufacturer() {
-        // Given
         Item item = new Item();
         item.setId(1L);
         item.setName("iPhone 16");
@@ -98,16 +87,13 @@ class ItemMapperTest {
         item.setQuantity(100);
         item.setManufacturer(null);
 
-        // When
         ItemDTO dto = itemMapper.toDto(item);
 
-        // Then
         assertThat(dto.getManufacturerId()).isNull();
     }
 
     @Test
     void toDtoList_shouldMapListOfEntitiesToDtos() {
-        // Given
         Country country = new Country();
         country.setId(1L);
 
@@ -127,10 +113,8 @@ class ItemMapperTest {
 
         List<Item> items = Arrays.asList(item1, item2);
 
-        // When
-        List<ItemDTO> dtos = items.stream().map(itemMapper::toDto).toList(); // Simulate list mapping
+        List<ItemDTO> dtos = items.stream().map(itemMapper::toDto).toList();
 
-        // Then
         assertThat(dtos).hasSize(2);
         assertThat(dtos.get(0).getId()).isEqualTo(1L);
         assertThat(dtos.get(1).getId()).isEqualTo(2L);

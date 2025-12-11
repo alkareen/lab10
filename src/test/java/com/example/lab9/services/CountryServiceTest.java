@@ -32,7 +32,6 @@ class CountryServiceTest {
 
     @Test
     void getAllCountries_shouldReturnListOfDtos() {
-        // Given
         Country country1 = new Country();
         country1.setId(1L);
         country1.setName("US");
@@ -59,10 +58,8 @@ class CountryServiceTest {
         when(countryMapper.toDto(country1)).thenReturn(dto1);
         when(countryMapper.toDto(country2)).thenReturn(dto2);
 
-        // When
         List<CountryDTO> result = countryService.getAllCountries();
 
-        // Then
         assertThat(result).hasSize(2);
         assertThat(result.get(0).getId()).isEqualTo(1L);
         assertThat(result.get(1).getId()).isEqualTo(2L);
@@ -71,7 +68,6 @@ class CountryServiceTest {
 
     @Test
     void getCountryById_shouldReturnDtoWhenFound() {
-        // Given
         Long id = 1L;
         Country country = new Country();
         country.setId(id);
@@ -86,10 +82,8 @@ class CountryServiceTest {
         when(countryRepository.findById(id)).thenReturn(Optional.of(country));
         when(countryMapper.toDto(country)).thenReturn(dto);
 
-        // When
         CountryDTO result = countryService.getCountryById(id);
 
-        // Then
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(id);
         verify(countryRepository, times(1)).findById(id);
@@ -97,21 +91,17 @@ class CountryServiceTest {
 
     @Test
     void getCountryById_shouldReturnNullWhenNotFound() {
-        // Given
         Long id = 1L;
         when(countryRepository.findById(id)).thenReturn(Optional.empty());
 
-        // When
         CountryDTO result = countryService.getCountryById(id);
 
-        // Then
         assertThat(result).isNull();
         verify(countryRepository, times(1)).findById(id);
     }
 
     @Test
     void createCountry_shouldSaveAndReturnDto() {
-        // Given
         CountryDTO dto = new CountryDTO();
         dto.setName("US");
         dto.setCode("US");
@@ -134,17 +124,14 @@ class CountryServiceTest {
         when(countryRepository.save(country)).thenReturn(saved);
         when(countryMapper.toDto(saved)).thenReturn(savedDto);
 
-        // When
         CountryDTO result = countryService.createCountry(dto);
 
-        // Then
         assertThat(result.getId()).isEqualTo(1L);
         verify(countryRepository, times(1)).save(any(Country.class));
     }
 
     @Test
     void updateCountry_shouldUpdateAndReturnDtoWhenFound() {
-        // Given
         Long id = 1L;
         CountryDTO dto = new CountryDTO();
         dto.setName("Updated US");
@@ -169,38 +156,30 @@ class CountryServiceTest {
         when(countryRepository.save(existing)).thenReturn(updated);
         when(countryMapper.toDto(updated)).thenReturn(updatedDto);
 
-        // When
         CountryDTO result = countryService.updateCountry(id, dto);
 
-        // Then
         assertThat(result.getName()).isEqualTo("Updated US");
         verify(countryRepository, times(1)).save(existing);
     }
 
     @Test
     void updateCountry_shouldReturnNullWhenNotFound() {
-        // Given
         Long id = 1L;
         CountryDTO dto = new CountryDTO();
         when(countryRepository.findById(id)).thenReturn(Optional.empty());
 
-        // When
         CountryDTO result = countryService.updateCountry(id, dto);
 
-        // Then
         assertThat(result).isNull();
         verify(countryRepository, never()).save(any());
     }
 
     @Test
     void deleteCountry_shouldDeleteById() {
-        // Given
         Long id = 1L;
 
-        // When
         countryService.deleteCountry(id);
 
-        // Then
         verify(countryRepository, times(1)).deleteById(id);
     }
 }
